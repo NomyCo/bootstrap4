@@ -1,6 +1,9 @@
 :root {
     --el_grey: #717774;
 }
+html {
+    scroll-behavior: smooth;
+  }
 body {
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -25,4 +28,21 @@ body {
 }
 #navigation > div > ul > .nav-item > .active {
     color: #fff;
+}
+
+.section {
+    margin-top: 100px;
+    outline: 1px solid red;
+}
+
+/*переключалка*/
+:target {
+  padding-top: 65px;
+    color: red;
+}
+
+/*canvas*/
+.canvas {
+    width: 100px;
+    height: 100px;
 }
