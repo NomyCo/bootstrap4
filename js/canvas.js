@@ -1,8 +1,12 @@
 //переменные
 let canvas = document.querySelectorAll('.canvas');
-let max = 100;
-let firns = 0;
-let k = (2 * Math.PI) / 100;
+let i = 0;
+
+//Вспомогательный массив (для работы функции splice)
+let helplArr = []
+canvas.forEach(elem => {
+    helplArr.push(elem)
+})
 
 // массив из canvas
 let ctxArr = [];
@@ -10,35 +14,28 @@ canvas.forEach(elem => {
     ctxArr.push(elem.getContext('2d'))
 })
 
+
 //событие при скролле
 window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-
-    //считываем только большее значение скролла (скролл работает только вниз)
-    //при скролле вверх данные не считываются
-    if (firns < scrolled) {
-        firns += scrolled
-        firns = scrolled
-        console.log(firns)
-    }
-
-    if (firns >= getCoords(canvas[0])-300 && firns <= getCoords(canvas[0])) { drawCircle(5, ctxArr[0], 1) }
-    if (firns >= getCoords(canvas[1])-500 && firns <= getCoords(canvas[1])) { drawCircle(5, ctxArr[1], 2) }
-    if (firns >= getCoords(canvas[2])-500 && firns <= getCoords(canvas[2])) { drawCircle(5, ctxArr[2], 3) }
-    if (firns >= getCoords(canvas[3])-500 && firns <= getCoords(canvas[3])) { drawCircle(5, ctxArr[3], 4) }
-
+    let scrolled = window.scrollY;
+    //функция сработала удалить из массива
+    //второе сравнение - конец страницы
+    helplArr.forEach((elem, index) => {
+        if (scrolled >= getCoords(elem) - 200 || window.scrollY + 1 >= document.documentElement.scrollHeight - document.documentElement.clientHeight) {
+            drawCircle(5, ctxArr[index], ++i)
+            ctxArr.splice(index, 1)
+            helplArr.splice(index, 1)
+        }
+    })
 })
-
 
 //координата объекта
 function getCoords(box1) {
     var box = box1.getBoundingClientRect();
     return box.top + pageYOffset;
 }
-console.log(getCoords(canvas[3]))
 
-
-//показать число
+//рисовать число
 function draw(ctx, num) {
     ctx.beginPath();
     ctx.font = "25px Arial";
@@ -50,6 +47,8 @@ function draw(ctx, num) {
 
 //рисовать круг
 function drawCircle(time, ctx, num) {
+    let k = (2 * Math.PI) / 100;
+    let max = 100;
     let x = 1;
     let timeID = setInterval(() => {
         if (x <= max) {
@@ -66,5 +65,6 @@ function drawCircle(time, ctx, num) {
             clearInterval(timeID)
         }
     }, time);
+
     draw(ctx, num)
 }
