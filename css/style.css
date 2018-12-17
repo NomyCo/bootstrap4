@@ -45,4 +45,26 @@ body {
 .canvas {
     width: 100px;
     height: 100px;
+    z-index: 2;
+}
+.bgcanvas {
+    position: absolute;
+    top: 4px;
+    width: 100px;
+    height: 90px;
+    background-color: white;
+    z-index: 1;
+}
+/*анимация высоты*/
+.height {
+    width: 1px;
+    height: 0px;
+    background:#2aa9e0; 
+    position: absolute;
+    top: 94px;
+    left: 50%;
+    transition: all cubic-bezier(0, 0.9, 0.88, 0.51) 2s;
+}
+.height.active {
+    height: 456px
 }

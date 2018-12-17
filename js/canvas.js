@@ -1,7 +1,7 @@
 //переменные
 let canvas = document.querySelectorAll('.canvas');
 let i = 0;
-
+let j = 0;
 //Вспомогательный массив (для работы функции splice)
 let helplArr = []
 canvas.forEach(elem => {
@@ -25,7 +25,9 @@ window.addEventListener('scroll', () => {
             drawCircle(5, ctxArr[index], ++i)
             ctxArr.splice(index, 1)
             helplArr.splice(index, 1)
+            drawLine(j++);
         }
+
     })
 })
 
@@ -67,4 +69,18 @@ function drawCircle(time, ctx, num) {
     }, time);
 
     draw(ctx, num)
+};
+
+//показать линию.classList.add('active')
+function drawLine(index) {
+    let height = Array.from(document.querySelectorAll('.d-flex .height'));
+    console.log(height[index])
+    height[index].classList.add('active')
+
+    // height.forEach((elem, index) => {
+    //     elem.classList.add('active')
+    //     console.log(elem)
+    //     height.splice(index)
+    // })
+
 }
