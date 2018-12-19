@@ -68,3 +68,28 @@ body {
 .height.active {
     height: 456px
 }
+
+/*КНОПКА НАВЕРХ*/
+.btn_up {
+    position: fixed;
+    width: 39px;
+    bottom: 25px;
+    right: -100px;
+    height: 36px;
+    background: url(../img/strelki.svg) no-repeat center, #717774;
+    background-size: 21px;
+    transform: rotate(180deg);
+    border-radius: 5px;
+    transition: all .5s ease;
+	opacity: 0;
+    cursor: pointer;
+}
+.btn_up:hover {
+    background: url(../img/strelki.svg) no-repeat center,#2aa9e0;
+    background-size: 21px;
+}
+.btn_up.active {
+    opacity: 1;
+    right: 25px;
+    bottom: 25px;
+}
